@@ -11,7 +11,12 @@ import commentRoute from "./routes/comment.route.js";
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.CLIENT_URL
+].filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins, methods: ["POST", "GET"], credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
