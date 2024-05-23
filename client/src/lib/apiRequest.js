@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiRequest = axios.create({
-  baseURL: "https://real-esate-sfe.vercel.app/api",
+  baseURL: "http://localhost:8800/api",
   withCredentials: true,
 });
 
