@@ -150,7 +150,7 @@ function CommentsPage() {
         ...response.data,
         user: {
           username: currentUser.username || "Anonymous",
-          avatar: currentUser.avatar || "noavatar.jpg",
+          avatar: currentUser.avatar || "/noavatar.jpg",
         },
         replies: [],
       };
@@ -175,7 +175,7 @@ function CommentsPage() {
         ...response.data,
         user: {
           username: currentUser.username || "Anonymous",
-          avatar: currentUser.avatar || "noavatar.jpg",
+          avatar: currentUser.avatar || "/noavatar.jpg",
         },
         commentId,
       };
@@ -326,7 +326,7 @@ function CommentsPage() {
                   <div className="commentsList">
                     {comments.map((comment) => (
                       <div className="comment" key={comment.id}>
-                        <img src={comment.user?.avatar || "noavatar.jpg"} alt="Avatar" />
+                        <img src={comment.user?.avatar || "/noavatar.jpg"} alt="Avatar" />
                         <div className="commentDetails">
                           <span className="username">{comment.user?.username || "Anonymous"}</span>
                           <span className="timestamp">{new Date(comment.createdAt).toLocaleString()}</span>
@@ -347,7 +347,7 @@ function CommentsPage() {
                           <div className="replies">
                             {comment.replies && comment.replies.map((reply) => (
                               <div className="reply" key={reply.id}>
-                                <img src={reply.user?.avatar || "noavatar.jpg"} alt="Avatar" />
+                                <img src={reply.user?.avatar || "/noavatar.jpg"} alt="Avatar" />
                                 <div className="replyDetails">
                                   <span className="username">{reply.user?.username || "Anonymous"}</span>
                                   <span className="timestamp">{new Date(reply.createdAt).toLocaleString()}</span>
