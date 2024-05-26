@@ -6,18 +6,14 @@ function AboutPage() {
   return (
     <div className="aboutPage">
       <div className="imgContainer">
-        <img src="/bg-about.png" alt="" />
+        <img src="/logofinale.png" alt="Company Logo" />
       </div>
       <div className="textContainer">
         <div className="wrapper">
           <h1 className="title">About Us</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-            explicabo suscipit cum eius, iure est nulla animi consequatur
-            facilis id pariatur fugit quos laudantium temporibus dolor ea
-            repellat provident impedit!
+            We are a leading company dedicated to providing top-notch services and innovative solutions. Our expert team works tirelessly to ensure exceptional results and client satisfaction in every project we undertake.
           </p>
-          {/* Additional content */}
         </div>
       </div>
     </div>

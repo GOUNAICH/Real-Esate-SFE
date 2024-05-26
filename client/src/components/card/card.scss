@@ -19,6 +19,7 @@
       border-radius: 10px;
     }
   }
+
   .textContainer {
     flex: 3;
     display: flex;
@@ -96,6 +97,27 @@
           &:hover {
             background-color: lightgray;
           }
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          padding: 5px 10px;
+          border: none;
+          border-radius: 5px;
+          background-color: white;
+          color: #444;
+          font-size: 14px;
+          cursor: pointer;
+          transition: background-color 0.3s ease, color 0.3s ease;
+
+          img {
+            width: 16px;
+            height: 16px;
+          }
+
+          
         }
       }
     }

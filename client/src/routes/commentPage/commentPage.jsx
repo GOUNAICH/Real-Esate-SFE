@@ -303,11 +303,33 @@ function CommentsPage() {
           {user && post && (
             <>
               <div className="postImageContainer">
-                
+
                 <Slider images={post.images} />
                 <div className="user">
                   <img src={user.avatar || "/noavatar.jpg"} alt="Avatar" />
                   <p>{user.username}</p>
+                </div>
+                <div className="sizes">
+                  <div className="size">
+                    <img src="/112548.png" alt="" />
+                    <span>{post.price} $</span>
+                  </div>
+                  <div className="size">
+                    <img src="/location3-removebg-preview.png" alt="" />
+                    <span>{post.city}</span>
+                  </div>
+                  <div className="size">
+                    <img src="/size.png" alt="" />
+                    <span>{post.postDetail.size} sqft</span>
+                  </div>
+                  <div className="size">
+                    <img src="/bed.png" alt="" />
+                    <span>{post.bedroom} beds</span>
+                  </div>
+                  <div className="size">
+                    <img src="/bath.png" alt="" />
+                    <span>{post.bathroom} bathroom</span>
+                  </div>
                 </div>
               </div>
               <div className="commentsSection">

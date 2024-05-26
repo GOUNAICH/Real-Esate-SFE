@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState, useCallback } from "react";
 import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
@@ -13,32 +13,38 @@ function ProfilePage() {
   const data = useLoaderData();
   const { currentUser, fetchCurrentUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [rating, setRating] = useState(0); 
+  const [rating, setRating] = useState(0);
+
+  const fetchData = useCallback(async () => {
+    try {
+      await fetchCurrentUser();
+      if (currentUser) {
+        setRating(currentUser.avgRating || 0);
+      }
+    } catch (error) {
+      console.log("Error fetching current user data:", error);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await fetchCurrentUser();
-        if (currentUser) {
-          setRating(currentUser.avgRating || 0);
-        }
-      } catch (error) {
-        console.log("Error fetching current user data:", error);
-      }
-    };
-
     fetchData();
-  }, [fetchCurrentUser, currentUser]);
+  }, [fetchData]);
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
 
   const handleLogout = async () => {
     try {
+   
       await apiRequest.post("/auth/logout");
       updateUser(null);
-      navigate("/");
       toast.success("Logout successful!");
     } catch (err) {
       console.log(err);
-    }
+    } 
   };
 
   return (

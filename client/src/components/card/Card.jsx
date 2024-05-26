@@ -1,18 +1,42 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./card.scss";
 import { toast } from "react-toastify";
+import apiRequest from "../../lib/apiRequest";
 
 function Card({ item }) {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  
+  const [saved, setSaved] = useState(() => {
+    const savedState = localStorage.getItem(`saved_${item.id}`);
+    return savedState ? JSON.parse(savedState) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(`saved_${item.id}`, JSON.stringify(saved));
+  }, [item.id, saved]);
 
   const handleCardClick = (e) => {
     if (!currentUser) {
       e.preventDefault();
       toast.warn("You need to log in to view this post!");
-      navigate("/login");  // Assuming there's a login route
+      navigate("/login");
+    }
+  };
+
+  const handleSave = async () => {
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+    setSaved((prev) => !prev);
+    try {
+      await apiRequest.post("/users/save", { postId: item.id });
+    } catch (err) {
+      console.log(err);
+      setSaved((prev) => !prev);
     }
   };
 
@@ -44,9 +68,15 @@ function Card({ item }) {
             </div>
           </div>
           <div className="icons">
-            <div className="icon">
+            <button
+              onClick={handleSave}
+              style={{
+                backgroundColor: saved ? "#fece51" : "white",
+              }}
+            >
               <img src="/save.png" alt="" />
-            </div>
+              {saved ? "Saved" : "Save"}
+            </button>
             <div className="icon">
               <Link to={`/comments/${item.userId}/${item.id}`}>
                 <img src="/comment.png" alt="" />

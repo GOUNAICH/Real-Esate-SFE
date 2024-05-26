@@ -7,8 +7,6 @@ import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AiOutlinePhone } from 'react-icons/ai';
-import { Link } from "react-router-dom";
 
 function Chat({ chats: initialChats }) {
   const { currentUser } = useContext(AuthContext);
@@ -175,7 +173,6 @@ function Chat({ chats: initialChats }) {
             <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
             <span>{c.receiver.username}</span>
             <p>{c.lastMessage}</p>
-            <img  className="deletechat" src="/images.png" alt="" />
             <a href="https://gounaich.github.io/vedio-call/" target="_blank" rel="noopener noreferrer">
               <img className="callicon" src="/call-icon.png" alt="" />
             </a>

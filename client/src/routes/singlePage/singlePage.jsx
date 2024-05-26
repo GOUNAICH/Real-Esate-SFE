@@ -82,7 +82,7 @@ function SinglePage() {
     try {
       await apiRequest.delete(`/posts/${post.id}`);
       toast.success("Post deleted successfully.", { toastId: "delete-success" });
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       console.error("Failed to delete post:", error);
       toast.error("Failed to delete post. Please try again.", { toastId: "delete-error" });
@@ -224,12 +224,12 @@ function SinglePage() {
                 <Link to={`/update-post/${post.id}`}>
                   <button>
                     <img src="/update.png" alt="" />
-                    Update Post
+                    Update
                   </button>
                 </Link>
                 <button onClick={handleDeletePost}>
                   <img src="/delete.png" alt="" />
-                  Delete Post
+                  Delete
                 </button>
               </>
             )}
@@ -240,8 +240,15 @@ function SinglePage() {
               }}
             >
               <img src="/save.png" alt="" />
-              {saved ? "Place Saved" : "Save the Place"}
+              {saved ? "Saved" : "Save"}
             </button>
+            <Link to={`/comments/${post.userId}/${post.id}`}>
+              <button>
+                <img src="/comment.png" alt="" />
+                Comment
+              </button>
+            </Link>
+
           </div>
         </div>
       </div>
