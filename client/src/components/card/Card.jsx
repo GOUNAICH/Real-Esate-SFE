@@ -11,7 +11,7 @@ function Card({ item }) {
   
   const [saved, setSaved] = useState(() => {
     const savedState = localStorage.getItem(`saved_${item.id}`);
-    return savedState ? JSON.parse(savedState) : false;
+    return savedState ? JSON.parse(savedState) : item.isSaved || false;
   });
 
   useEffect(() => {
