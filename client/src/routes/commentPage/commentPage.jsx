@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { SocketContext } from "../../context/SocketContext";
 import { toast } from "react-toastify";
 import Slider from "../../components/slider/Slider";
+import { Link } from "react-router-dom";
 import "./commentPage.scss";
 
 function CommentsPage() {
@@ -306,7 +307,9 @@ function CommentsPage() {
 
                 <Slider images={post.images} />
                 <div className="user">
-                  <img src={user.avatar || "/noavatar.jpg"} alt="Avatar" />
+                <Link to={`/profile/${post.userId}`}>
+                    <img src={post.user.avatar || "/noavatar.jpg"} alt="" />
+                  </Link>
                   <p>{user.username}</p>
                 </div>
                 <div className="sizes">

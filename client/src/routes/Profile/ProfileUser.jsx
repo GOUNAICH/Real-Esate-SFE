@@ -127,7 +127,7 @@ function ProfileUser() {
                           total={5}
                           rating={ratingData.ratedValue}
                           onRate={({ rating }) => handleRating(rating)}
-                          className="rater"
+                          style={{ fontSize: 30, color: "yellow" }}
                         />
                       ) : !ratingData.showRating ? (
                         <button onClick={handleShowRating} className="rateButton">
@@ -139,7 +139,7 @@ function ProfileUser() {
                             total={5}
                             rating={0}
                             onRate={({ rating }) => handleRating(rating)}
-                            className="rater"
+                            style={{ fontSize: 30, color: "yellow" }}
                           />
                         </div>
                       )}
