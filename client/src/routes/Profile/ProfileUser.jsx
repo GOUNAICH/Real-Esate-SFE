@@ -91,21 +91,27 @@ function ProfileUser() {
             ) : (
               user && (
                 <>
-                  <div className="avatar-container">
-                    <img
-                      src={user.avatar || "/noavatar.jpg"}
-                      alt="Avatar"
-                      className="avatar"
-                    />
+                  <div className="avatar-username-container">
+                    <div className="avatar-container">
+                      <img
+                        src={user.avatar || "/noavatar.jpg"}
+                        alt="Avatar"
+                        className="avatar"
+                      />
+                    </div>
+                    <div className="user-details">
+                      <span className="username">
+                        <b>{user.username}</b>
+                      </span>
+                    </div>
                   </div>
                   <div className="user-details">
-                    <span className="username">
-                      <b>{user.username}</b>
-                    </span>
                     <span className="email">
+                      <img src="/email-icon.png" className="user-icon" alt="" />
                       <b>{user.email}</b>
                     </span>
                     <span className="rating">
+                      <img src="/rating-icon.png" className="user-icon" alt="" />
                       <b>
                         {ratingData.avgRating
                           ? ratingData.avgRating.toFixed(1)
@@ -121,7 +127,7 @@ function ProfileUser() {
                           total={5}
                           rating={ratingData.ratedValue}
                           onRate={({ rating }) => handleRating(rating)}
-                          style={{ fontSize: 30, color: "yellow" }}
+                          className="rater"
                         />
                       ) : !ratingData.showRating ? (
                         <button onClick={handleShowRating} className="rateButton">
@@ -133,7 +139,7 @@ function ProfileUser() {
                             total={5}
                             rating={0}
                             onRate={({ rating }) => handleRating(rating)}
-                            style={{ fontSize: 30, color: "yellow" }}
+                            className="rater"
                           />
                         </div>
                       )}
