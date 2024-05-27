@@ -174,9 +174,15 @@ function UpdatePostPage() {
                 </div>
             </div>
             <div className="sideContainer">
-                {post.images.map((image, index) => (
-                    <img src={image} key={index} alt="" />
-                ))}
+                {images.length > 0 ? (
+                    images.map((image, index) => (
+                        <img src={image} key={index} alt="" />
+                    ))
+                ) : (
+                    post.images.map((image, index) => (
+                        <img src={image} key={index} alt="" />
+                    ))
+                )}
                 <UploadWidget
                     uwConfig={{
                         multiple: true,
@@ -184,9 +190,15 @@ function UpdatePostPage() {
                         uploadPreset: "estate",
                         folder: "posts",
                     }}
-                    setState={setImages}
+                    setState={(uploadedImages) => {
+                        if (uploadedImages.length > 0) {
+                            setImages(uploadedImages);
+                        }
+                    }}
                 />
             </div>
+
+
 
         </div>
     );
