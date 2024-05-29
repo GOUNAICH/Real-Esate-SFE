@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState ,useContext } from "react";
 import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import { DarkModeContext } from "../../context/DarkModeContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -11,6 +12,7 @@ function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+  const { darkMode } = useContext(DarkModeContext);
 
   const navigate = useNavigate();
 
@@ -85,7 +87,7 @@ function NewPostPage() {
   };
 
   return (
-    <div className="newPostPage">
+    <div className={`newPostPage ${darkMode ? "dark-mode" : ""}`}>
       <div className="formContainer">
         <h1>Add New Post</h1>
         <div className="wrapper">

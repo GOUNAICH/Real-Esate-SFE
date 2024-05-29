@@ -73,4 +73,11 @@
       border-radius: 5px;
     }
   }
+
+  &.dark-mode {
+
+    .sideContainer {
+      background-color: #363739;
+    }
+  }
 }
