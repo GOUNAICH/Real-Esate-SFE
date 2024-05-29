@@ -73,4 +73,32 @@
             border-radius: 5px;
         }
     }
+    &.dark-mode {
+
+        .wrapper {
+          
+
+            form {
+                
+
+                .item {
+                    
+
+                    input {
+
+                        background-color: #292929;
+                        color: #fcf5f3;
+                    }
+
+                    
+                }
+
+                
+            }
+        }
+
+        .sideContainer {
+          background-color: #363739;
+        }
+      }
 }

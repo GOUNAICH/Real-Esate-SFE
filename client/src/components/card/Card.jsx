@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { DarkModeContext } from "../../context/DarkModeContext";
 import "./card.scss";
 import { toast } from "react-toastify";
 import apiRequest from "../../lib/apiRequest";
@@ -8,7 +9,8 @@ import apiRequest from "../../lib/apiRequest";
 function Card({ item }) {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+  const { darkMode } = useContext(DarkModeContext);
+
   const [saved, setSaved] = useState(() => {
     const savedState = localStorage.getItem(`saved_${item.id}`);
     return savedState ? JSON.parse(savedState) : item.isSaved || false;
@@ -41,7 +43,7 @@ function Card({ item }) {
   };
 
   return (
-    <div className="card">
+    <div className={`card ${darkMode ? "dark-mode" : ""}`}>
       <Link to={`/${item.id}`} className="imageContainer" onClick={handleCardClick}>
         <img src={item.images[0]} alt="" />
       </Link>
@@ -52,7 +54,7 @@ function Card({ item }) {
           </Link>
         </h2>
         <p className="address">
-          <img src="/pin.png" alt="" />
+          <img src="/adress.png" alt="" />
           <span>{item.address}</span>
         </p>
         <p className="price">$ {item.price}</p>
@@ -71,14 +73,14 @@ function Card({ item }) {
             <button
               onClick={handleSave}
               style={{
-                backgroundColor: saved ? "#fece51" : "white",
+                backgroundColor: saved ? "#fece51" : "rgba(0, 0, 0, 0)",
               }}
             >
-              <img src="/save.png" alt="" />
+              <img src="/save.png" alt="" onClick={handleCardClick} />
               {saved ? "Saved" : "Save"}
             </button>
             <div className="icon">
-              <Link to={`/comments/${item.userId}/${item.id}`}>
+              <Link to={`/comments/${item.userId}/${item.id}`} onClick={handleCardClick}>
                 <img src="/comment.png" alt="" />
               </Link>
             </div>

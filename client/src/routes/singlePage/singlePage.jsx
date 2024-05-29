@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 function SinglePage() {
   const post = useLoaderData();
@@ -15,6 +16,7 @@ function SinglePage() {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const isCurrentUserPost = currentUser && currentUser.id === post.userId;
+  const { darkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     setSaved(post.isSaved);
@@ -95,7 +97,7 @@ function SinglePage() {
   };
 
   return (
-    <div className="singlePage">
+    <div className={`singlePage ${darkMode ? "dark-mode" : ""}`}>
       <div className="details">
         <div className="wrapper">
           <Slider images={post.images} />
@@ -104,7 +106,7 @@ function SinglePage() {
               <div className="post">
                 <h1>{post.title}</h1>
                 <div className="address">
-                  <img src="/pin.png" alt="" />
+                  <img src="/adress.png" alt="" />
                   <span>{post.address}</span>
                 </div>
                 <div className="price">$ {post.price}</div>

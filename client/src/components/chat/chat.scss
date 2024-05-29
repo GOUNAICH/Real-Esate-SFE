@@ -15,7 +15,7 @@
     }
 
     .message {
-      background-color: white;
+      background-color: #fcf5f3;
       padding: 20px;
       border-radius: 10px;
       display: flex;
@@ -23,6 +23,9 @@
       gap: 20px;
       cursor: pointer;
       position: relative; 
+      margin-left: 16px;
+      width: 420px;
+      box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.3), -2px -3px 3px 0px rgba(0, 0, 0, 0.1);
 
       img {
         width: 40px;
@@ -210,5 +213,15 @@
   
   .deleteIcon {
     margin-right: 8px; 
+  }
+
+  &.dark-mode {
+    color: black;
+
+    .messages {
+      h1 {
+        color: #f8f6f6;
+      }
+    }
   }
 }

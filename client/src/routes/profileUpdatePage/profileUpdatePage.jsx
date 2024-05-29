@@ -4,12 +4,14 @@ import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import { DarkModeContext } from "../../context/DarkModeContext";
 import { toast } from "react-toastify";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState([]);
+  const { darkMode } = useContext(DarkModeContext);
 
   const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
-        avatar:avatar[0]
+        avatar: avatar[0]
       });
       updateUser(res.data);
       toast.success("Profile updated successfully!");
@@ -37,7 +39,7 @@ function ProfileUpdatePage() {
   };
 
   return (
-    <div className="profileUpdatePage">
+    <div className={`profileUpdatePage ${darkMode ? "dark-mode" : ""}`}>
       <div className="formContainer">
         <form onSubmit={handleSubmit}>
           <h1>Update Profile</h1>

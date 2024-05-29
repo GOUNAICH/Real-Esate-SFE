@@ -1,8 +1,10 @@
-// AgentsPage.jsx
-import React from "react";
+import React, { useContext } from "react";
 import "./agentsPage.scss";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 function AgentsPage() {
+  const { darkMode } = useContext(DarkModeContext);
+
   // Dummy agent data
   const agents = [
     {
@@ -33,14 +35,14 @@ function AgentsPage() {
   };
 
   return (
-    <div className="agentsPage">
+    <div className={`agentsPage ${darkMode ? 'dark-mode' : ''}`}>
       <div className="agentsContainer">
         <h1 className="title">Our Agents</h1>
         <div className="agentList">
           {agents.map((agent) => (
             <div key={agent.id} className="agentCard">
               <img src={agent.imageUrl} alt={agent.name} />
-              <h2>{agent.name}</h2>
+              <h2 className="agentname">{agent.name}</h2>
               <p className="email">Email: {agent.email}</p>
               <p className="phone">Phone: {agent.phone}</p>
               <button onClick={() => sendMessage(agent.email)}>Contact</button>

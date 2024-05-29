@@ -1,6 +1,7 @@
 import React, { Suspense, useContext, useEffect, useState, useCallback } from "react";
 import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { DarkModeContext } from "../../context/DarkModeContext";
 import apiRequest from "../../lib/apiRequest";
 import { toast } from "react-toastify";
 import Chat from "../../components/chat/Chat";
@@ -14,6 +15,7 @@ function ProfilePage() {
   const { currentUser, fetchCurrentUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
+  const { darkMode } = useContext(DarkModeContext);
 
   const fetchData = useCallback(async () => {
     try {
@@ -48,7 +50,7 @@ function ProfilePage() {
   };
 
   return (
-    <div className="profilePage">
+    <div className={`profilePage ${darkMode ? "dark-mode" : ""}`}>
       <div className="details">
         <div className="wrapper">
           <div className="title">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useContext} from "react";
 import { useParams } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import List from "../../components/list/List";
@@ -6,6 +6,7 @@ import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DarkModeContext } from "../../context/DarkModeContext";
 import "./ProfileUser.scss";
 
 function ProfileUser() {
@@ -13,6 +14,7 @@ function ProfileUser() {
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { darkMode } = useContext(DarkModeContext);
   const [ratingData, setRatingData] = useState({
     ratedValue: null,
     avgRating: 0,
@@ -78,7 +80,7 @@ function ProfileUser() {
   };
 
   return (
-    <div className="profileUser">
+    <div className={`profileUser ${darkMode ? "dark-mode" : ""}`}>
       <ToastContainer />
       <div className="details">
         <div className="wrapper">

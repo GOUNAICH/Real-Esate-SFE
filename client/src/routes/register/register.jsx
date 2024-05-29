@@ -1,12 +1,15 @@
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import apiRequest from "../../lib/apiRequest";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
+import { DarkModeContext } from "../../context/DarkModeContext";
+
 function Register() {
+
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { darkMode } = useContext(DarkModeContext);
 
   const navigate = useNavigate();
 
@@ -29,7 +32,7 @@ function Register() {
 
       toast.success('Registration successful!');
 
-      
+
       navigate("/login");
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
@@ -42,7 +45,7 @@ function Register() {
     }
   };
   return (
-    <div className="registerPage">
+    <div className={`registerPage ${darkMode ? "dark-mode" : ""}`}>
       <div className="formContainer">
         <form onSubmit={handleSubmit}>
           <h1>Create an Account</h1>

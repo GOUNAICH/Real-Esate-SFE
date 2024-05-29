@@ -37,4 +37,23 @@
       }
     }
   }
+
+  /* Dark Mode Styles */
+  &.dark-mode {
+    background-color: #1a1a1a;
+    color: #f4f2f2;
+
+    .textContainer {
+      background-color: #363739;
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .textContainer .wrapper .title {
+      color: #f4f2f2;
+    }
+
+    .textContainer .wrapper p {
+      color: #f4f2f2;
+    }
+  }
 }

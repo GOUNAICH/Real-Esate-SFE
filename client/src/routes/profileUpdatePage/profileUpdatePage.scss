@@ -17,9 +17,6 @@
         flex-direction: column;
         gap: 5px;
 
-        label {
-        }
-
         input {
           padding: 20px;
           border-radius: 5px;
@@ -50,6 +47,12 @@
     .avatar{
       width: 50%;
       object-fit: cover;
+    }
+  }
+  &.dark-mode {
+
+    .sideContainer {
+      background-color: #363739;
     }
   }
 }

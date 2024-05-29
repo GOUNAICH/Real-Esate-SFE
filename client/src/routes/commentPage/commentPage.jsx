@@ -9,11 +9,13 @@ import { toast } from "react-toastify";
 import Slider from "../../components/slider/Slider";
 import { Link } from "react-router-dom";
 import "./commentPage.scss";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 function CommentsPage() {
   const { userId, postId } = useParams();
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
+  const { darkMode } = useContext(DarkModeContext);
 
   const [user, setUser] = useState(null);
   const [post, setPost] = useState(null);
@@ -295,7 +297,7 @@ function CommentsPage() {
 
 
   return (
-    <div className="commentsPage">
+    <div className={`commentsPage ${darkMode ? "dark-mode" : ""}`}>
       {error && <p>{error}</p>}
       {loadingUser || loadingPost ? (
         <p>Loading...</p>
@@ -357,7 +359,7 @@ function CommentsPage() {
                           <span className="timestamp">{new Date(comment.createdAt).toLocaleString()}</span>
                           <p>{comment.text}</p>
                           <div className="actions">
-                            <button onClick={() => handleLikeComment(comment.id)} style={{ color: likedComments.includes(comment.id) ? 'blue' : '#555' }}>
+                            <button onClick={() => handleLikeComment(comment.id)} style={{ color: likedComments.includes(comment.id) ? '#6dbcf0' : '#bdbdbd' }}>
                               <FontAwesomeIcon icon={faThumbsUp} /> Like ({comment.likes})
                             </button>
                             {currentUser.id === comment.userId && (

@@ -37,11 +37,6 @@
       font-weight: 600;
       color: #444;
       transition: all 0.4s ease;
-
-      &:hover {
-        color: #000;
-        scale: 1.01;
-      }
     }
 
     .address {
@@ -50,6 +45,11 @@
       align-items: center;
       gap: 5px;
       color: #888;
+
+      img {
+        width: 45px;
+        height: 45px;
+      }
     }
 
     .price {
@@ -75,7 +75,7 @@
           display: flex;
           align-items: center;
           gap: 5px;
-          background-color: whitesmoke;
+
           padding: 5px;
           border-radius: 5px;
         }
@@ -93,10 +93,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-
-          &:hover {
-            background-color: lightgray;
-          }
+          background-color: rgb(249, 246, 246);
         }
 
         button {
@@ -107,7 +104,6 @@
           border: none;
           border-radius: 5px;
           background-color: white;
-          color: #444;
           font-size: 14px;
           cursor: pointer;
           transition: background-color 0.3s ease, color 0.3s ease;
@@ -117,7 +113,45 @@
             height: 16px;
           }
 
-          
+
+        }
+      }
+    }
+  }
+
+  &.dark-mode {
+    background-color: #1a1a1a;
+    color: #f4f2f2;
+
+
+
+    .title {
+      color: #f4f2f2;
+    }
+
+    .address {
+      color: #ccc;
+    }
+
+    .price {
+      background-color: rgba(254, 205, 81, 0.2);
+    }
+
+    .features {
+      .feature {
+        color: #ffffff;
+      }
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    .icons {
+      button {
+        color: #ffffff;
+        img {
+          filter: brightness(0) invert(1);
         }
       }
     }

@@ -1,14 +1,16 @@
 import { useContext } from "react";
 import CountUp from "react-countup"; 
 import SearchBar from "../../components/searchBar/SearchBar";
-import "./homePage.scss";
 import { AuthContext } from "../../context/AuthContext";
+import { DarkModeContext } from "../../context/DarkModeContext";
+import "./homePage.scss";
 
 function HomePage() {
   const { currentUser } = useContext(AuthContext);
+  const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className="homePage">
+    <div className={`homePage ${darkMode ? "dark-mode" : ""}`}>
       <div className="textContainer">
         <div className="wrapper">
           <h1 className="title">Find Your Dream Property with Smsar EstateFinder</h1>

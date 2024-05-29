@@ -7,10 +7,12 @@ import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 function Chat({ chats: initialChats }) {
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
+  const { darkMode } = useContext(DarkModeContext);
   const [chats, setChats] = useState(
     initialChats.filter((chat) => !chat.deletedBy?.includes(currentUser.id))
   );
@@ -154,7 +156,7 @@ function Chat({ chats: initialChats }) {
   };
 
   return (
-    <div className="chat">
+    <div className={`chat ${darkMode ? "dark-mode" : ""}`}>
       <ToastContainer />
       <div className="messages">
         <h1>Messages</h1>
@@ -165,7 +167,7 @@ function Chat({ chats: initialChats }) {
             style={{
               backgroundColor:
                 c.seenBy.includes(currentUser.id) || chat?.id === c.id
-                  ? "white"
+                  ? "fcf5f3"
                   : "#fecd514e",
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
@@ -176,7 +178,7 @@ function Chat({ chats: initialChats }) {
             <a href="https://gounaich.github.io/vedio-call/" target="_blank" rel="noopener noreferrer">
               <img className="callicon" src="/call-icon.png" alt="" />
             </a>
-            
+
           </div>
         ))}
       </div>

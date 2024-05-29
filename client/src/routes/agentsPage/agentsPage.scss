@@ -81,11 +81,11 @@
       }
     }
     .email {
-      color: #646464; /* Blue color for email */
+      color: #646464; 
       font-weight: bold;
     }
     .phone {
-      color: #797979; /* Green color for phone number */
+      color: #797979;
       font-weight: bold;
     }
   }
@@ -99,5 +99,31 @@
       font-size: 1rem;
     }
   }
-  
+
+ 
+  &.dark-mode {
+    color: #f4f2f2;
+    background-color: #1a1a1a;
+
+    .agentCard {
+      background-color: #363739;
+      color: #f4f2f2;
+      border: 1px solid #666;
+    }
+
+    .email,
+    .phone {
+      color: #9d9494;
+    }
+
+    .title{
+      color: #f4f2f2;
+    }
+    .additionalInfo {
+      color: #b7acac;
+    }
+    .agentname{
+      color: #ffffff;
+    }
+  }
 }

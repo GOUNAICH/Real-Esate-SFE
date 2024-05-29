@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 function UpdatePostPage() {
     const { id } = useParams(); // Get the post ID from the URL
@@ -12,6 +13,7 @@ function UpdatePostPage() {
     const [images, setImages] = useState([]);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { darkMode } = useContext(DarkModeContext);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -70,7 +72,7 @@ function UpdatePostPage() {
     if (!post) return <div>Loading...</div>;
 
     return (
-        <div className="newPostPage">
+        <div className={`newPostPage ${darkMode ? "dark-mode" : ""}`}>
             <div className="formContainer">
                 <h1>Add New Post</h1>
                 <div className="wrapper">

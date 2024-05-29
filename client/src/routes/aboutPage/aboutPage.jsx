@@ -1,10 +1,12 @@
-import React from "react";
-import SearchBar from "../../components/searchBar/SearchBar";
+import React, { useContext } from "react";
 import "./aboutPage.scss";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 function AboutPage() {
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
-    <div className="aboutPage">
+    <div className={`aboutPage ${darkMode ? 'dark-mode' : ''}`}>
       <div className="imgContainer">
         <img src="/logofinale.png" alt="Company Logo" />
       </div>

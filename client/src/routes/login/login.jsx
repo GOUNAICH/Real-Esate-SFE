@@ -3,13 +3,15 @@ import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
+import { DarkModeContext } from "../../context/DarkModeContext";
 import { toast } from "react-toastify";
 
 function Login() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { darkMode } = useContext(DarkModeContext);
 
-  const {updateUser} = useContext(AuthContext)
+  const { updateUser } = useContext(AuthContext)
 
   const navigate = useNavigate();
 
@@ -33,9 +35,9 @@ function Login() {
 
       navigate("/");
     } catch (err) {
-      if (err.response && err.response.data && err.response.data.message) {  
+      if (err.response && err.response.data && err.response.data.message) {
         toast.error(err.response.data.message);
-      } else {     
+      } else {
         toast.error("An error occurred while processing your request.");
       }
     } finally {
@@ -43,7 +45,7 @@ function Login() {
     }
   };
   return (
-    <div className="login">
+    <div className={`login ${darkMode ? "dark-mode" : ""}`}>
       <div className="formContainer">
         <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>

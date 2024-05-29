@@ -58,4 +58,12 @@
       width: 100%;
     }
   }
+
+
+  &.dark-mode {
+
+    .imgContainer {
+      background-color: #363739;
+    }
+  }
 }

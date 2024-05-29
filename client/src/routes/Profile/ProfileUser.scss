@@ -169,4 +169,14 @@
       }
     }
   }
+
+  &.dark-mode {
+    .wrapper {
+      .title {
+        h1 {
+          color: #938a8a;
+        }
+      }
+    }
+  }
 }

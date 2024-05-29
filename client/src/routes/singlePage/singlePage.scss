@@ -1,5 +1,6 @@
 @import "../../responsive.scss";
 
+/* Base styles */
 .singlePage {
   display: flex;
   height: 100%;
@@ -9,6 +10,7 @@
     overflow: scroll;
   }
 
+  /* Details section */
   .details {
     flex: 3;
     height: 100%;
@@ -20,6 +22,7 @@
       margin-bottom: 50px;
     }
 
+    /* Wrapper */
     .wrapper {
       padding-right: 50px;
 
@@ -31,9 +34,11 @@
         padding-right: 0px;
       }
 
+      /* Info section */
       .info {
         margin-top: 50px;
 
+        /* Top section */
         .top {
           display: flex;
           justify-content: space-between;
@@ -43,6 +48,7 @@
             gap: 20px;
           }
 
+          /* Post info */
           .post {
             display: flex;
             flex-direction: column;
@@ -60,8 +66,8 @@
               font-size: 14px;
 
               img {
-                width: 16px;
-                height: 16px;
+                width: 45px;
+                height: 45px;
               }
             }
 
@@ -75,6 +81,7 @@
             }
           }
 
+          /* User info */
           .user {
             display: flex;
             flex-direction: column;
@@ -99,6 +106,7 @@
           }
         }
 
+        /* Bottom section */
         .bottom {
           margin-top: 50px;
           color: #555;
@@ -108,6 +116,7 @@
     }
   }
 
+  /* Features section */
   .features {
     flex: 2;
     background-color: #fcf5f3;
@@ -120,6 +129,7 @@
       margin-bottom: 50px;
     }
 
+    /* Wrapper */
     .wrapper {
       padding: 0px 20px;
       display: flex;
@@ -135,12 +145,14 @@
         height: 24px;
       }
 
+      /* Title */
       .title {
         font-weight: bold;
         font-size: 18px;
         margin-bottom: 10px;
       }
 
+      /* Feature items */
       .feature {
         display: flex;
         align-items: center;
@@ -161,6 +173,7 @@
         }
       }
 
+      /* List styles */
       .listVertical {
         display: flex;
         flex-direction: column;
@@ -178,6 +191,7 @@
         border-radius: 10px;
       }
 
+      /* Sizes section */
       .sizes {
         display: flex;
         justify-content: space-between;
@@ -196,15 +210,16 @@
         }
       }
 
+      /* Map container */
       .mapContainer {
         width: 100%;
         height: 200px;
       }
 
+      /* Buttons */
       .buttons {
         display: flex;
         justify-content: space-between;
-
 
         button {
           padding: 10px;
@@ -225,28 +240,60 @@
       }
     }
   }
-}
-/* Add this CSS to your stylesheet */
-.confirmation-buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
+
+  /* Dark mode */
+&.dark-mode {
+  /* Features section */
+  .features {
+    background-color: #363739; /* Dark background color */
+
+    .listVertical,
+    .listHorizontal {
+      background-color: #222222; /* Darker background color */
+      box-shadow: 0px 2px #111111; /* Darker shadow */
+    }
+
+    .title {
+      color: #e0e0e0; /* Lighter text color */
+    }
+
+    .feature img {
+      background-color: rgba(255, 255, 255, 0.1); 
+      filter: brightness(0) invert(1);
+    }
+
+    .featureText span {
+      color: #a0a0a0; 
+    }
+
+    .sizes .size {
+      background-color: #222222;
+      box-shadow: 0px 2px #111111; 
+      color: #ffffff;
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    .buttons button {
+      color: #000000; 
+      border: 1px solid #333333;
+    }
+  }
 }
 
-.confirmation-buttons button {
-  margin: 0 10px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
-.confirmation-buttons button:first-child {
-  background-color: #28a745; /* Green color for Yes button */
-  color: #fff;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.confirmation-buttons button:last-child {
-  background-color: #dc3545; /* Red color for No button */
-  color: #fff;
+::-webkit-scrollbar-thumb {
+  background-color: #c5c3be;
+  border-radius: 10px;
 }
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+

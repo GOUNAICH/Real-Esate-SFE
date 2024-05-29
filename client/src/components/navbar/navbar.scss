@@ -1,5 +1,31 @@
-
 @import "../../responsive.scss";
+
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #f4f2f2;
+
+  .right {
+    background-color: #363739;
+  }
+
+  .navbar a {
+    color: #f4f2f2;
+  }
+
+  .navbar .menu {
+    background-color: #1a1a1a;
+    color: #f4f2f2;
+  }
+
+
+  .logo {
+    img {
+      filter: brightness(2) invert(0);
+    }
+    }
+
+
+}
 
 nav {
   height: 100px;
@@ -47,6 +73,7 @@ nav {
       }
     }
   }
+
   .right {
     flex: 2;
     display: flex;
@@ -64,12 +91,12 @@ nav {
       margin: 20px;
     }
 
-    .user{
+    .user {
       display: flex;
       align-items: center;
       font-weight: bold;
 
-      img{
+      img {
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -77,20 +104,21 @@ nav {
         margin-right: 20px;
       }
 
-      span{
-        @include sm{
+      span {
+        @include sm {
           display: none;
         }
       }
 
-      .profile{
+      .profile {
         padding: 12px 24px;
         background-color: #fece51;
         cursor: pointer;
         border: none;
         position: relative;
-        
-        .notification{
+        color: #000000;
+
+        .notification {
           position: absolute;
           top: -8px;
           right: -8px;
@@ -103,13 +131,14 @@ nav {
           align-items: center;
           justify-content: center;
         }
-
       }
     }
 
     .register {
       background-color: #fece51;
+      color: #000000 !important;
     }
+    
 
     .menuIcon {
       display: none;
@@ -149,6 +178,19 @@ nav {
         a {
           display: initial;
         }
+      }
+    }
+
+    .darkModeIcon {
+      cursor: pointer;
+      margin-right: 100px;
+      font-size: 20px;
+
+      &:hover {
+        color: #fece51;
+        transform: scale(1.1);
+        transition: all 0.3s ease;
+        transform: rotate(360deg);
       }
     }
   }

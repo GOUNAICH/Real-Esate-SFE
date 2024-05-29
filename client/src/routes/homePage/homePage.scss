@@ -4,6 +4,39 @@
   display: flex;
   height: 100%;
 
+  &.dark-mode {
+    background-color: #1a1a1a;
+    color: #f4f2f2;
+
+    .textContainer {
+      .wrapper {
+        .title {
+          color: #f4f2f2;
+        }
+
+        p {
+          color: #d3d3d3;
+        }
+
+        .boxes {
+          .box {
+            h1, h2 {
+              color: #f4f2f2;
+            }
+          }
+        }
+      }
+    }
+
+    .imgContainer {
+      background-color: #363739;
+
+      img {
+        filter: brightness(0.8);
+      }
+    }
+  }
+
   .textContainer {
     flex: 3;
 
@@ -14,16 +47,17 @@
       justify-content: center;
       gap: 50px;
       height: 100%;
+      
 
-      @include lg{
+      @include lg {
         padding-right: 50px;
       }
 
-      @include md{
+      @include md {
         padding: 0;
       }
 
-      @include sm{
+      @include sm {
         justify-content: flex-start;
       }
 
