@@ -17,8 +17,13 @@ function SearchBar() {
   };
 
   const handleChange = (e) => {
-    setQuery((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setQuery((prev) => ({
+      ...prev,
+      [name]: name === "city" ? value.toLowerCase() : value,
+    }));
   };
+  
 
   return (
     <div className="searchBar">

@@ -28,8 +28,10 @@ function Card({ item }) {
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
     if (!currentUser) {
+      e.preventDefault();
+      toast.warn("You need to log in to view this post!");
       navigate("/login");
       return;
     }
@@ -76,7 +78,7 @@ function Card({ item }) {
                 backgroundColor: saved ? "#fece51" : "rgba(0, 0, 0, 0)",
               }}
             >
-              <img src="/save.png" alt="" onClick={handleCardClick} />
+              <img src="/save.png" alt="" />
               {saved ? "Saved" : "Save"}
             </button>
             <div className="icon">

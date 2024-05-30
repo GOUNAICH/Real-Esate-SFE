@@ -8,11 +8,13 @@ import { useNotificationStore } from "../../lib/notificationStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DarkModeContext } from "../../context/DarkModeContext";
+import { useNavigate } from "react-router-dom";
 
 function Chat({ chats: initialChats }) {
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
   const { darkMode } = useContext(DarkModeContext);
+  const navigate = useNavigate();
   const [chats, setChats] = useState(
     initialChats.filter((chat) => !chat.deletedBy?.includes(currentUser.id))
   );
@@ -23,6 +25,7 @@ function Chat({ chats: initialChats }) {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
+    // Handle clicks outside the dropdown to close it
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownVisible(false);
@@ -36,12 +39,13 @@ function Chat({ chats: initialChats }) {
   }, [dropdownRef]);
 
   useEffect(() => {
+    // Scroll to the bottom of the chat when a new message is received
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat]);
 
   const handleOpenChat = async (id, receiver) => {
     try {
-      const res = await apiRequest("/chats/" + id);
+      const res = await apiRequest(`/chats/${id}`);
       if (!res.data.seenBy.includes(currentUser.id)) {
         decrease();
       }
@@ -53,13 +57,12 @@ function Chat({ chats: initialChats }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const text = formData.get("text");
-
     if (!text) return;
+
     try {
-      const res = await apiRequest.post("/messages/" + chat.id, { text });
+      const res = await apiRequest.post(`/messages/${chat.id}`, { text });
       setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
       e.target.reset();
       socket.emit("sendMessage", {
@@ -74,7 +77,7 @@ function Chat({ chats: initialChats }) {
   useEffect(() => {
     const read = async () => {
       try {
-        await apiRequest.put("/chats/read/" + chat.id);
+        await apiRequest.put(`/chats/read/${chat.id}`);
       } catch (err) {
         console.log(err);
       }
@@ -88,6 +91,7 @@ function Chat({ chats: initialChats }) {
         }
       });
     }
+
     return () => {
       socket.off("getMessage");
     };
@@ -95,12 +99,11 @@ function Chat({ chats: initialChats }) {
 
   const confirmDeleteChat = async () => {
     try {
-      await apiRequest.delete("/chats/" + chat.id);
+      await apiRequest.delete(`/chats/${chat.id}`);
       setChats((prevChats) => prevChats.filter((c) => c.id !== chat.id));
       setChat(null);
       toast.success("Chat deleted successfully!");
       toast.dismiss();
-
     } catch (err) {
       console.log(err);
       toast.error("Failed to delete chat.");
@@ -111,18 +114,11 @@ function Chat({ chats: initialChats }) {
     toast(
       <div>
         <p>Are you sure you want to delete this chat?</p>
-        <div
-          style={{
-            display: "flex",
-
-            marginTop: "10px",
-          }}
-        >
+        <div style={{ display: "flex", marginTop: "10px" }}>
           <button
             onClick={confirmDeleteChat}
             style={{
               marginRight: "10px",
-
               backgroundColor: "green",
               color: "white",
               border: "none",
@@ -148,10 +144,7 @@ function Chat({ chats: initialChats }) {
           </button>
         </div>
       </div>,
-      {
-        position: "top-center",
-        autoClose: false,
-      }
+      { position: "top-center", autoClose: false }
     );
   };
 
@@ -165,20 +158,21 @@ function Chat({ chats: initialChats }) {
             className="message"
             key={c.id}
             style={{
-              backgroundColor:
-                c.seenBy.includes(currentUser.id) || chat?.id === c.id
-                  ? "fcf5f3"
-                  : "#fecd514e",
+              backgroundColor: c.seenBy.includes(currentUser.id) || chat?.id === c.id ? "#fcf5f3" : "#fecd514e",
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
           >
             <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
             <span>{c.receiver.username}</span>
             <p>{c.lastMessage}</p>
-            <a href="https://gounaich.github.io/vedio-call/" target="_blank" rel="noopener noreferrer">
-              <img className="callicon" src="/call-icon.png" alt="" />
+            <a
+              href="https://gounaich.github.io/vedio-call/"
+              target="_blank"
+              rel="noopener noreferrer" 
+              title="Start a video call"
+            >
+              <img className="callicon" src="/call-icon.png" alt="Video Call" />
             </a>
-
           </div>
         ))}
       </div>
@@ -190,16 +184,16 @@ function Chat({ chats: initialChats }) {
                 <img
                   src={chat.receiver.avatar || "noavatar.jpg"}
                   alt=""
-                  onClick={() => setIsDropdownVisible(!isDropdownVisible)} // Toggle dropdown on avatar click
+                  onClick={() => setIsDropdownVisible(!isDropdownVisible)}
                 />
                 {isDropdownVisible && (
                   <div className="dropdownMenu" ref={dropdownRef}>
+                    <button onClick={() => navigate(`/profile/${chat.receiver.id}`)}  className="profile">
+                      <img src="./search (2).png" alt="Profile" className="profileIcon" />
+                      Profile
+                    </button>
                     <button onClick={handleDeleteChat} className="deleteButton">
-                      <img
-                        src="/deletered.png"
-                        alt="Delete"
-                        className="deleteIcon"
-                      />
+                      <img src="/delete-chat (1).png" alt="Delete" className="deleteIcon" />
                       Delete Chat
                     </button>
                   </div>
@@ -207,8 +201,7 @@ function Chat({ chats: initialChats }) {
               </div>
               {chat.receiver.username}
             </div>
-
-            <span className="close" onClick={() => setChat(null)} title="close">
+            <span className="close" onClick={() => setChat(null)} title="Close">
               X
             </span>
           </div>
@@ -217,12 +210,8 @@ function Chat({ chats: initialChats }) {
               <div
                 className="chatMessage"
                 style={{
-                  alignSelf:
-                    message.userId === currentUser.id
-                      ? "flex-end"
-                      : "flex-start",
-                  textAlign:
-                    message.userId === currentUser.id ? "right" : "left",
+                  alignSelf: message.userId === currentUser.id ? "flex-end" : "flex-start",
+                  textAlign: message.userId === currentUser.id ? "right" : "left",
                 }}
                 key={message.id}
               >
@@ -233,8 +222,8 @@ function Chat({ chats: initialChats }) {
             <div ref={messageEndRef}></div>
           </div>
           <form onSubmit={handleSubmit} className="bottom">
-            <textarea name="text"></textarea>
-            <button>Send</button>
+            <textarea name="text" required></textarea>
+            <button type="submit">Send</button>
           </form>
         </div>
       )}
